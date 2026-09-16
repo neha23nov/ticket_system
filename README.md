@@ -102,12 +102,6 @@ ticket-system/
 └── README.md                       # This file
 ```
 
-## Deployment
-
-The application is deployed at: **[TODO: Add deployment URL]**
-
-Health check: **[TODO: Add health check URL]**
-
 ## Assumptions
 
 1. SQLite is used as the database — data is persisted in a local file. For production, consider PostgreSQL.
