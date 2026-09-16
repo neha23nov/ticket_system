@@ -45,11 +45,6 @@ open  →  in_progress  →  closed
 
 ## Quick Start
 
-### Prerequisites
-
-- [Go 1.22+](https://go.dev/dl/) (for local development)
-- [Docker](https://docs.docker.com/get-docker/) (for containerized run)
-
 ### Run Locally (without Docker)
 
 ```bash
@@ -80,95 +75,6 @@ curl http://localhost:8080/health
 # Expected: {"status":"ok"}
 ```
 
-## API Usage Examples
-
-### 1. Register a User
-
-```bash
-curl -X POST http://localhost:8080/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"username":"john","email":"john@example.com","password":"secret123"}'
-```
-
-Response (201 Created):
-```json
-{
-  "id": 1,
-  "username": "john",
-  "email": "john@example.com",
-  "created_at": "2024-01-01T00:00:00Z"
-}
-```
-
-### 2. Login
-
-```bash
-curl -X POST http://localhost:8080/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"john@example.com","password":"secret123"}'
-```
-
-Response (200 OK):
-```json
-{
-  "token": "eyJhbGciOiJIUzI1NiIs..."
-}
-```
-
-### 3. Create a Ticket
-
-```bash
-curl -X POST http://localhost:8080/tickets \
-  -H "Authorization: Bearer <your-token>" \
-  -H "Content-Type: application/json" \
-  -d '{"title":"Fix login bug","description":"Users cannot log in"}'
-```
-
-Response (201 Created):
-```json
-{
-  "id": 1,
-  "title": "Fix login bug",
-  "description": "Users cannot log in",
-  "status": "open",
-  "user_id": 1,
-  "created_at": "2024-01-01T00:00:00Z",
-  "updated_at": "2024-01-01T00:00:00Z"
-}
-```
-
-### 4. List My Tickets
-
-```bash
-curl http://localhost:8080/tickets \
-  -H "Authorization: Bearer <your-token>"
-```
-
-### 5. Get Ticket by ID
-
-```bash
-curl http://localhost:8080/tickets/1 \
-  -H "Authorization: Bearer <your-token>"
-```
-
-### 6. Update Ticket Status
-
-```bash
-curl -X PATCH http://localhost:8080/tickets/1/status \
-  -H "Authorization: Bearer <your-token>" \
-  -H "Content-Type: application/json" \
-  -d '{"status":"in_progress"}'
-```
-
-## Environment Variables
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `JWT_SECRET` | `default-secret-key-123` | Secret key for signing JWT tokens |
-| `PORT` | `8080` | Port the server listens on |
-| `DB_PATH` | `data/tickets.db` | Path to the SQLite database file |
-
-See [.env.example](.env.example) for a template.
 
 ## Project Structure
 
@@ -210,6 +116,4 @@ Health check: **[TODO: Add health check URL]**
 4. No admin role or ticket assignment flow.
 5. Email format validation is basic (presence check only).
 
-## License
 
-This project is created for the Backend Intern Assessment.
